@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nakshi Kantha - The Woven Stories of Bengal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terracotta: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#d97706',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        crimson: {
+                            600: '#dc2626',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                        },
+                        gold: {
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                        },
+                        parchment: '#FAF6F0',
+                        warmgray: '#2A2421',
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Kantha Stitch Border effect */
+        .stitch-border {
+            border: 2px dashed #c2410c;
+            border-spacing: 4px;
+        }
+        .bg-kantha-pattern {
+            background-color: #FAF6F0;
+            background-image: radial-gradient(#c2410c 0.75px, transparent 0.75px), radial-gradient(#c2410c 0.75px, #FAF6F0 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            background-opacity: 0.05;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c2410c;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-parchment text-warmgray font-sans antialiased selection:bg-terracotta-700 selection:text-white">
+
+    <!-- Header Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-parchment/90 backdrop-blur-md border-b border-terracotta-900/10">
+        <div class="max-w-7xl mx-mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full border-2 border-dashed border-terracotta-700 flex items-center justify-center bg-terracotta-100">
+                        <i class="fa-solid fa-feather-pointed text-terracotta-800 text-lg"></i>
+                    </div>
+                    <div>
+                        <a href="#" class="font-cinzel text-xl sm:text-2xl font-bold tracking-wider text-terracotta-900">NAKSHI KANTHA</a>
+                        <span class="block text-[10px] tracking-widest text-terracotta-700 uppercase font-semibold">Bengali Heritage Art</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide">
+                    <a href="#heritage" class="hover:text-terracotta-700 transition">HERITAGE</a>
+                    <a href="#motifs" class="hover:text-terracotta-700 transition">MOTIF GUIDE</a>
+                    <a href="#gallery" class="hover:text-terracotta-700 transition">GALLERY</a>
+                    <a href="#artisans" class="hover:text-terracotta-700 transition">OUR ARTISANS</a>
+                    <a href="#catalog" class="hover:text-terracotta-700 transition">COLLECTION</a>
+                    <a href="#custom" class="bg-terracotta-800 text-parchment px-5 py-2.5 rounded-full hover:bg-terracotta-900 transition shadow-md flex items-center gap-2">
+                        <span>Custom Order</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-terracotta-900 focus:outline-none p-2" aria-label="Toggle Navigation Menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-parchment border-b border-terracotta-900/10 px-4 pt-2 pb-6 space-y-3">
+            <a href="#heritage" class="mobile-link block px-3 py-2 text-base font-medium text-terracotta-900 hover:bg-terracotta-100 rounded-md">Heritage</a>
+            <a href="#motifs" class="mobile-link block px-3 py-2 text-base font-medium text-terracotta-900 hover:bg-terracotta-100 rounded-md">Motif Guide</a>
+            <a href="#gallery" class="mobile-link block px-3 py-2 text-base font-medium text-terracotta-900 hover:bg-terracotta-100 rounded-md">Gallery & Motifs</a>
+            <a href="#artisans" class="mobile-link block px-3 py-2 text-base font-medium text-terracotta-900 hover:bg-terracotta-100 rounded-md">Our Artisans</a>
+            <a href="#catalog" class="mobile-link block px-3 py-2 text-base font-medium text-terracotta-900 hover:bg-terracotta-100 rounded-md">Collection</a>
+            <a href="#custom" class="mobile-link block text-center bg-terracotta-800 text-parchment px-4 py-2.5 rounded-lg hover:bg-terracotta-900 font-medium">Custom Order</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-28 pb-20 md:pt-36 md:pb-32 overflow-hidden bg-kantha-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                
+                <!-- Text Content -->
+                <div class="md:col-span-7 space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-terracotta-700/30 bg-terracotta-100/60 text-terracotta-800 text-xs font-semibold tracking-wider uppercase">
+                        <i class="fa-solid fa-gem text-gold-600"></i> UNESCO Intangible Cultural Heritage Craft
+                    </div>
+                    
+                    <h1 class="font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold text-terracotta-900 leading-tight">
+                        Threads of Lore, <br/>
+                        <span class="italic text-crimson-800 font-normal">Stitches of Bengal's Soul</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-warmgray/80 max-w-2xl font-normal leading-relaxed">
+                        Explore the centuries-old tapestry of <em>Nakshi Kantha</em>—where discarded silk and cotton sarees are transformed into breathtaking embroidered masterpieces, woven with rural poetry, folklore, and devotion.
+                    </p>
+                    
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+                        <a href="#catalog" class="w-full sm:w-auto px-8 py-4 bg-terracotta-800 text-parchment rounded-xl font-semibold shadow-xl hover:bg-terracotta-900 hover:shadow-2xl transition duration-300 text-center flex items-center justify-center gap-3">
+                            <span>Explore Collection</span>
+                            <i class="fa-solid fa-compass"></i>
+                        </a>
+                        <a href="#heritage" class="w-full sm:w-auto px-8 py-4 border-2 border-terracotta-800 text-terracotta-900 rounded-xl font-semibold hover:bg-terracotta-100 transition duration-300 text-center">
+                            Our Heritage Story
+                        </a>
+                    </div>
+
+                    <!-- Highlights Stat Strip -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-terracotta-800/10 text-center md:text-left">
+                        <div>
+                            <span class="block font-playfair text-2xl font-bold text-terracotta-900">500+</span>
+                            <span class="text-xs text-warmgray/70 uppercase tracking-wider">Years of Heritage</span>
+                        </div>
+                        <div>
+                            <span class="block font-playfair text-2xl font-bold text-terracotta-900">100%</span>
+                            <span class="text-xs text-warmgray/70 uppercase tracking-wider">Handcrafted</span>
+                        </div>
+                        <div>
+                            <span class="block font-playfair text-2xl font-bold text-terracotta-900">1,200+</span>
+                            <span class="text-xs text-warmgray/70 uppercase tracking-wider">Artisan Women</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Showcase Collage -->
+                <div class="md:col-span-5 relative">
+                    <div class="relative mx-auto w-full max-w-md">
+                        <!-- Decorative Frame Behind -->
+                        <div class="absolute -top-4 -left-4 w-full h-full border-2 border-dashed border-terracotta-700/40 rounded-3xl -z-10"></div>
+                        <div class="absolute -bottom-4 -right-4 w-full h-full bg-gold-400/20 rounded-3xl -z-10"></div>
+                        
+                        <!-- Main Canvas Image -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-white">
+                            <img src="https://images.unsplash.com/photo-1606744888344-49423b3f2d0d?auto=format&fit=crop&w=800&q=80" onerror="this.src='https://placehold.co/800x900/9a3412/FAF6F0?text=Nakshi+Kantha+Quilt'" alt="Nakshi Kantha Art Embroidery" class="w-full h-[420px] object-cover hover:scale-105 transition duration-700">
+                            
+                            <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
+                                <span class="bg-gold-500 text-warmgray text-[10px] font-bold px-2 py-0.5 rounded tracking-widest uppercase">Masterpiece</span>
+                                <h3 class="font-playfair text-lg font-semibold mt-1">Nokshi Shonar Bangla Quilt</h3>
+                                <p class="text-xs text-gray-200">Hand-stitched in Jasore using traditional run-stitch motifs.</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border border-terracotta-100 hidden sm:flex items-center gap-3">
+                            <div class="w-12 h-12 bg-crimson-800 text-white rounded-full flex items-center justify-center font-playfair text-xl">
+                                🌺
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-terracotta-900 uppercase">Authentic Crafts</span>
+                                <span class="text-[11px] text-warmgray/70">Fair Trade Certified</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage & Story Section -->
+    <section id="heritage" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-terracotta-700">The Tradition & Origins</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl font-bold text-terracotta-900 mt-2">Every Stitch Tells a Tale of Devotion</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-terracotta-700 to-gold-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-parchment p-8 rounded-2xl border border-terracotta-900/10 hover:shadow-lg transition duration-300">
+                    <div class="w-14 h-14 bg-terracotta-100 rounded-xl flex items-center justify-center text-terracotta-800 text-2xl mb-6">
+                        <i class="fa-solid fa-recycle"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold text-terracotta-900 mb-3">Sustainable Upcycling Heritage</h3>
+                    <p class="text-warmgray/80 text-sm leading-relaxed">
+                        Originally created by Bengali women using layers of soft, worn sarees and dhotis stitched together with threads pulled from saree borders. It remains one of the world's oldest forms of zero-waste textile art.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-parchment p-8 rounded-2xl border border-terracotta-900/10 hover:shadow-lg transition duration-300">
+                    <div class="w-14 h-14 bg-terracotta-100 rounded-xl flex items-center justify-center text-terracotta-800 text-2xl mb-6">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold text-terracotta-900 mb-3">The Poetry of 'Naksha'</h3>
+                    <p class="text-warmgray/80 text-sm leading-relaxed">
+                        The term <em>'Nakshi'</em> comes from the Persian word <em>'Naksha'</em>, meaning artistic pattern. Artisans translate memories, monsoon rains, village life, and cosmic symbols directly onto cloth without pre-drawn stencils.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-parchment p-8 rounded-2xl border border-terracotta-900/10 hover:shadow-lg transition duration-300">
+                    <div class="w-14 h-14 bg-terracotta-100 rounded-xl flex items-center justify-center text-terracotta-800 text-2xl mb-6">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold text-terracotta-900 mb-3">Heirlooms of Love</h3>
+                    <p class="text-warmgray/80 text-sm leading-relaxed">
+                        Historically gifted to newborns or brides as blessings, each Kantha quilt contains hundreds of thousands of microscopic <em>'Kantha Stitches'</em> (running stitches), creating a unique rippled, tactile texture.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quote Block -->
+            <div class="mt-16 bg-terracotta-900 text-parchment p-8 sm:p-12 rounded-3xl relative overflow-hidden shadow-xl">
+                <div class="absolute right-0 top-0 opacity-10 text-9xl font-serif text-white pointer-events-none">“</div>
+                <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+                    <p class="font-playfair italic text-lg sm:text-2xl text-terracotta-100">
+                        "Look at the Kantha quilt—it is not merely cloth; it is a mother's lullaby woven into thread, a bride's quiet longing, and a village's living history."
+                    </p>
+                    <span class="block text-xs font-semibold tracking-widest text-gold-400 uppercase">— Jasimuddin, Renowned Bengali Poet (Nokshi Kanthar Math)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Motif Guide Section -->
+    <section id="motifs" class="py-20 bg-kantha-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-terracotta-700">Symbolism & Meaning</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl font-bold text-terracotta-900 mt-2">Interactive Motif Explorer</h2>
+                <p class="text-warmgray/70 mt-3 text-sm">Click on any classic Nakshi Kantha motif below to discover its ancient spiritual and cultural representation.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+                <!-- Motif Selector Grid -->
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4" id="motif-buttons">
+                    <!-- Motif 1 -->
+                    <button onclick="selectMotif('padma')" id="btn-padma" class="motif-btn active-motif border-2 border-terracotta-700 bg-white p-5 rounded-2xl text-left shadow-sm hover:shadow-md transition text-warmgray">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-3xl">🪷</span>
+                            <span class="text-xs bg-terracotta-100 text-terracotta-800 font-bold px-2 py-0.5 rounded">Centerpiece</span>
+                        </div>
+                        <h4 class="font-playfair font-bold text-lg text-terracotta-900">Padma (Lotus)</h4>
+                        <p class="text-xs text-warmgray/70 mt-1">Cosmic order & divine purity</p>
+                    </button>
+
+                    <!-- Motif 2 -->
+                    <button onclick="selectMotif('kalka')" id="btn-kalka" class="motif-btn border-2 border-transparent bg-white p-5 rounded-2xl text-left shadow-sm hover:shadow-md transition text-warmgray">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-3xl">🥭</span>
+                            <span class="text-xs bg-gold-100 text-gold-800 font-bold px-2 py-0.5 rounded">Paisley</span>
+                        </div>
+                        <h4 class="font-playfair font-bold text-lg text-terracotta-900">Kalka (Mango/Paisley)</h4>
+                        <p class="text-xs text-warmgray/70 mt-1">Fertility & tree of life stem</p>
+                    </button>
+
+                    <!-- Motif 3 -->
+                    <button onclick="selectMotif('mayur')" id="btn-mayur" class="motif-btn border-2 border-transparent bg-white p-5 rounded-2xl text-left shadow-sm hover:shadow-md transition text-warmgray">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-3xl">🦚</span>
+                            <span class="text-xs bg-crimson-100 text-crimson-800 font-bold px-2 py-0.5 rounded">Fauna</span>
+                        </div>
+                        <h4 class="font-playfair font-bold text-lg text-terracotta-900">Mayur (Peacock)</h4>
+                        <p class="text-xs text-warmgray/70 mt-1">Royalty, grace & beauty</p>
+                    </button>
+
+                    <!-- Motif 4 -->
+                    <button onclick="selectMotif('shonkho')" id="btn-shonkho" class="motif-btn border-2 border-transparent bg-white p-5 rounded-2xl text-left shadow-sm hover:shadow-md transition text-warmgray">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-3xl">🐚</span>
+                            <span class="text-xs bg-terracotta-100 text-terracotta-800 font-bold px-2 py-0.5 rounded">Sacred</span>
+                        </div>
+                        <h4 class="font-playfair font-bold text-lg text-terracotta-900">Shonkho (Conch)</h4>
+                        <p class="text-xs text-warmgray/70 mt-1">Auspicious beginnings & prosperity</p>
+                    </button>
+                </div>
+
+                <!-- Motif Detail Card -->
+                <div class="lg:col-span-6 bg-white p-8 rounded-3xl border-2 border-dashed border-terracotta-700/30 shadow-xl" id="motif-display">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span id="motif-icon" class="text-5xl p-3 bg-terracotta-100 rounded-2xl">🪷</span>
+                        <div>
+                            <h3 id="motif-title" class="font-playfair text-2xl font-bold text-terracotta-900">Padma (The Sacred Lotus)</h3>
+                            <span id="motif-subtitle" class="text-xs text-terracotta-700 font-semibold uppercase tracking-wider">Traditional Center Motif</span>
+                        </div>
+                    </div>
+                    
+                    <p id="motif-description" class="text-warmgray/80 text-sm leading-relaxed mb-6">
+                        The lotus motif is central to almost all traditional Nakshi Kanthas. Placed right at the center of the quilt, it symbolizes the sacred cosmos, purity emerging from mud, and divine harmony. The petals are rendered with concentric running stitches called <em>'Chala Stitches'</em>.
+                    </p>
+
+                    <div class="bg-parchment p-4 rounded-xl border border-terracotta-900/10 space-y-2">
+                        <h5 class="font-bold text-xs uppercase text-terracotta-800 tracking-wider">Stitching Technique</h5>
+                        <p id="motif-technique" class="text-xs text-warmgray/70">
+                            Stitched using fine red and indigo silk threads in circular progression. Outer borders are highlighted with <em>'Bhorat'</em> (fill-in running stitch).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery / Showcase Section with Filtering -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-terracotta-700">Artisan Masterpieces</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl font-bold text-terracotta-900 mt-2">Craft Showcase & Gallery</h2>
+                <p class="text-warmgray/70 mt-3 text-sm">Filter through our diverse needlework styles and historic patterns.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="filterGallery('all')" class="filter-btn active-filter px-5 py-2 rounded-full text-xs font-bold tracking-wider uppercase transition">All Artworks</button>
+                <button onclick="filterGallery('wall')" class="filter-btn px-5 py-2 rounded-full border border-terracotta-900/20 text-warmgray text-xs font-bold tracking-wider uppercase hover:border-terracotta-700 transition">Wall Tapestries</button>
+                <button onclick="filterGallery('quilt')" class="filter-btn px-5 py-2 rounded-full border border-terracotta-900/20 text-warmgray text-xs font-bold tracking-wider uppercase hover:border-terracotta-700 transition">Traditional Quilts</button>
+                <button onclick="filterGallery('apparel')" class="filter-btn px-5 py-2 rounded-full border border-terracotta-900/20 text-warmgray text-xs font-bold tracking-wider uppercase hover:border-terracotta-700 transition">Cushions & Stoles</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
+                
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item quilt group relative bg-parchment rounded-2xl overflow-hidden border border-terracotta-900/10 shadow-md hover:shadow-xl transition duration-500">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" onerror="this.src='https://placehold.co/800x600/9a3412/FAF6F0?text=Grand+Lotus+Quilt'" alt="Grand Lotus Tapestry" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <span class="absolute top-4 left-4 bg-terracotta-800 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">Heritage Quilt</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold text-terracotta-900 mb-2">Sujanini Heritage Quilt</h3>
+                        <p class="text-xs text-warmgray/70 mb-4 line-clamp-2">Depicting rural village scenes surrounded by intricate lotus floral borders and geometric run-stitches.</p>
+                        <button onclick="openLightbox('Sujanini Heritage Quilt', 'Jessore District Masterpiece', 'Crafted over 4 months by 3 artisan sisters. Features over 180,000 individual stitches depicting rural life and river folklore.', 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80')" class="w-full py-2.5 border border-terracotta-700 text-terracotta-800 rounded-xl text-xs font-bold hover:bg-terracotta-800 hover:text-white transition">View Details & Technique</button>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item wall group relative bg-parchment rounded-2xl overflow-hidden border border-terracotta-900/10 shadow-md hover:shadow-xl transition duration-500">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=800&q=80" onerror="this.src='https://placehold.co/800x600/7f1d1d/FAF6F0?text=Tree+of+Life+Wall+Art'" alt="Tree of Life Kantha" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <span class="absolute top-4 left-4 bg-crimson-800 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">Wall Art</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold text-terracotta-900 mb-2">Tree of Life Wall Tapestry</h3>
+                        <p class="text-xs text-warmgray/70 mb-4 line-clamp-2">Intricate Kalka paisley motifs interwoven with birds of paradise stitched on raw tussar silk.</p>
+                        <button onclick="openLightbox('Tree of Life Wall Tapestry', 'Rajshahi Silk Embroidery', 'Hand-stitched on pure natural silk using indigo and terracotta organic dyed cotton threads.', 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=800&q=80')" class="w-full py-2.5 border border-terracotta-700 text-terracotta-800 rounded-xl text-xs font-bold hover:bg-terracotta-800 hover:text-white transition">View Details & Technique</button>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item apparel group relative bg-parchment rounded-2xl overflow-hidden border border-terracotta-900/10 shadow-md hover:shadow-xl transition duration-500">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1606744888344-49423b3f2d0d?auto=format&fit=crop&w=800&q=80" onerror="this.src='https://placehold.co/800x600/ca8a04/FAF6F0?text=Embroidered+Stole'" alt="Embroidered Dupatta Stole" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <span class="absolute top-4 left-4 bg-gold-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">Wearable Art</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold text-terracotta-900 mb-2">Mayur Motif Silk Stole</h3>
+                        <p class="text-xs text-warmgray/70 mb-4 line-clamp-2">Lightweight elegance featuring peacock feather running stitch borders on handspun cotton.</p>
+                        <button onclick="openLightbox('Mayur Motif Silk Stole', 'Wearable Art Piece', 'Soft breathable tissue cotton embellished with fine micro-stitch borders using antique gold threads.', 'https://images.unsplash.com/photo-1606744888344-49423b3f2d0d?auto=format&fit=crop&w=800&q=80')" class="w-full py-2.5 border border-terracotta-700 text-terracotta-800 rounded-xl text-xs font-bold hover:bg-terracotta-800 hover:text-white transition">View Details & Technique</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Artisan Craftsmanship Section -->
+    <section id="artisans" class="py-20 bg-kantha-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" onerror="this.src='https://placehold.co/800x800/9a3412/FAF6F0?text=Artisan+At+Work'" alt="Bengal Artisan Woman Stitching Nakshi Kantha" class="w-full h-[450px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-terracotta-900/90 via-transparent to-transparent flex items-end p-8">
+                            <div class="text-white">
+                                <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Empowering Rural Lives</span>
+                                <h4 class="font-playfair text-2xl font-bold">Fair Trade & Sustainable Living</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs font-bold uppercase tracking-widest text-terracotta-700">Hands Behind The Magic</span>
+                    <h2 class="font-playfair text-3xl sm:text-4xl font-bold text-terracotta-900">Empowering Women Artisans of Rural Bengal</h2>
+                    <p class="text-warmgray/80 text-sm leading-relaxed">
+                        Nakshi Kantha is more than an artform; it is a vital vehicle for financial independence and self-reliance among women in rural Bangladesh and West Bengal. Every piece purchased directly supports fair wages, healthcare, and education in rural artisan clusters.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-terracotta-100 text-terracotta-800 rounded-lg flex items-center justify-center shrink-0 mt-1">
+                                <i class="fa-solid fa-hands-holding-child"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base text-terracotta-900">100% Ethical & Fair Trade</h4>
+                                <p class="text-xs text-warmgray/70">Artisans work comfortably from home, preserving their village lifestyles while earning sustainable incomes.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-terracotta-100 text-terracotta-800 rounded-lg flex items-center justify-center shrink-0 mt-1">
+                                <i class="fa-solid fa-seedling"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-base text-terracotta-900">Organic Threads & Fabrics</h4>
+                                <p class="text-xs text-warmgray/70">Utilizing pure cottons, wild tussar silk, and natural eco-friendly plant dyes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Product / Inquiry Catalog Section -->
+    <section id="catalog" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-terracotta-700">Handcrafted Catalog</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl font-bold text-terracotta-900 mt-2">Available Handcrafted Works</h2>
+                <p class="text-warmgray/70 mt-3 text-sm">Select a piece to request a custom price quote or purchase details.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item 1 -->
+                <div class="bg-parchment rounded-2xl overflow-hidden border border-terracotta-900/10 shadow-sm hover:shadow-lg transition p-4 flex flex-col justify-between">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1606744888344-49423b3f2d0d?auto=format&fit=crop&w=600&q=80" onerror="this.src='https://placehold.co/600x600/9a3412/FAF6F0?text=Royal+Kalka+Quilt'" alt="Royal Kalka Quilt" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <span class="text-[10px] font-bold text-terracotta-700 uppercase tracking-wider">Bed Spread / Quilt</span>
+                        <h3 class="font-playfair font-bold text-lg text-terracotta-900 mt-1">Royal Kalka King Quilt</h3>
+                        <p class="text-xs text-warmgray/70 mt-1">Double layered cotton with intricate paisley corner motifs.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-terracotta-900/10 flex items-center justify-between">
+                        <span class="font-playfair font-bold text-terracotta-900 text-sm">From $280</span>
+                        <button onclick="openInquiryModal('Royal Kalka King Quilt')" class="bg-terracotta-800 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-terracotta-900 transition">Inquire</button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-parchment rounded-2xl overflow-hidden border border-terracotta-900/10 shadow-sm hover:shadow-lg transition p-4 flex flex-col justify-between">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=600&q=80" onerror="this.src='https://placehold.co/600x600/7f1d1d/FAF6F0?text=Cushion+Set'" alt="Cushion Set" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <span class="text-[10px] font-bold text-terracotta-700 uppercase tracking-wider">Home Decor</span>
+                        <h3 class="font-playfair font-bold text-lg text-terracotta-900 mt-1">Nokshi Cushion Cover Trio</h3>
+                        <p class="text-xs text-warmgray/70 mt-1">Set of 3 hand-stitched pillow covers with floral lotus motifs.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-terracotta-900/10 flex items-center justify-between">
+                        <span class="font-playfair font-bold text-terracotta-900 text-sm">From $95</span>
+                        <button onclick="openInquiryModal('Nokshi Cushion Cover Trio')" class="bg-terracotta-800 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-terracotta-900 transition">Inquire</button>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-parchment rounded-2xl overflow-hidden border border-terracotta-900/10 shadow-sm hover:shadow-lg transition p-4 flex flex-col justify-between">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" onerror="this.src='https://placehold.co/600x600/ca8a04/FAF6F0?text=Framed+Wall+Art'" alt="Framed Wall Art" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <span class="text-[10px] font-bold text-terracotta-700 uppercase tracking-wider">Framed Artwork</span>
+                        <h3 class="font-playfair font-bold text-lg text-terracotta-900 mt-1">Gram Bangla Tapestry Frame</h3>
+                        <p class="text-xs text-warmgray/70 mt-1">Framed silk embroidered panel depicting river boats & folk life.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-terracotta-900/10 flex items-center justify-between">
+                        <span class="font-playfair font-bold text-terracotta-900 text-sm">From $350</span>
+                        <button onclick="openInquiryModal('Gram Bangla Tapestry Frame')" class="bg-terracotta-800 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-terracotta-900 transition">Inquire</button>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="bg-parchment rounded-2xl overflow-hidden border border-terracotta-900/10 shadow-sm hover:shadow-lg transition p-4 flex flex-col justify-between">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1606744888344-49423b3f2d0d?auto=format&fit=crop&w=600&q=80" onerror="this.src='https://placehold.co/600x600/9a3412/FAF6F0?text=Silk+Dupatta'" alt="Silk Dupatta" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <span class="text-[10px] font-bold text-terracotta-700 uppercase tracking-wider">Fashion & Apparel</span>
+                        <h3 class="font-playfair font-bold text-lg text-terracotta-900 mt-1">Tussar Silk Nakshi Scarf</h3>
+                        <p class="text-xs text-warmgray/70 mt-1">Lightweight wrap with geometric run-stitch body pattern.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-terracotta-900/10 flex items-center justify-between">
+                        <span class="font-playfair font-bold text-terracotta-900 text-sm">From $120</span>
+                        <button onclick="openInquiryModal('Tussar Silk Nakshi Scarf')" class="bg-terracotta-800 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-terracotta-900 transition">Inquire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Order & Contact Form -->
+    <section id="custom" class="py-20 bg-kantha-pattern">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl p-8 sm:p-12 border-2 border-dashed border-terracotta-700/40 shadow-2xl">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-xs font-bold uppercase tracking-widest text-terracotta-700">Commission Artwork</span>
+                    <h2 class="font-playfair text-3xl font-bold text-terracotta-900 mt-1">Request a Bespoke Nakshi Kantha</h2>
+                    <p class="text-xs sm:text-sm text-warmgray/70 mt-2">Have a specific motif, size, or story you want embroidered onto silk or cotton? Send us your custom request.</p>
+                </div>
+
+                <form id="custom-order-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-terracotta-900 mb-2">Full Name *</label>
+                            <input type="text" required placeholder="e.g. Sufia Begum" class="w-full px-4 py-3 rounded-xl border border-warmgray/20 focus:outline-none focus:border-terracotta-700 text-sm bg-parchment">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-terracotta-900 mb-2">Email Address *</label>
+                            <input type="email" required placeholder="name@domain.com" class="w-full px-4 py-3 rounded-xl border border-warmgray/20 focus:outline-none focus:border-terracotta-700 text-sm bg-parchment">
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-terracotta-900 mb-2">Desired Type</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-warmgray/20 focus:outline-none focus:border-terracotta-700 text-sm bg-parchment text-warmgray">
+                                <option>Wall Hanging / Tapestry</option>
+                                <option>Bed Quilt (King / Queen)</option>
+                                <option>Cushion Covers Set</option>
+                                <option>Saree / Apparel Embroidery</option>
+                                <option>Custom Heirloom Art Piece</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-terracotta-900 mb-2">Preferred Fabric</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-warmgray/20 focus:outline-none focus:border-terracotta-700 text-sm bg-parchment text-warmgray">
+                                <option>Handloom Mulmul Cotton</option>
+                                <option>Rajshahi Tussar Silk</option>
+                                <option>Upcycled Heritage Silk</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-terracotta-900 mb-2">Describe Your Vision & Motifs</label>
+                        <textarea rows="4" placeholder="Tell us about favored colors, motifs (e.g. Lotus, Peacock, Village Life), size requirements..." class="w-full px-4 py-3 rounded-xl border border-warmgray/20 focus:outline-none focus:border-terracotta-700 text-sm bg-parchment"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-terracotta-800 text-white font-bold rounded-xl shadow-lg hover:bg-terracotta-900 transition flex items-center justify-center gap-2">
+                        <span>Send Custom Order Inquiry</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+
+                <!-- Success Toast Message -->
+                <div id="form-toast" class="hidden mt-6 bg-emerald-100 border border-emerald-400 text-emerald-800 p-4 rounded-xl text-center text-sm font-semibold">
+                    ✨ Thank you for your inquiry! Our craft curator will respond to your custom order request within 24 hours.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-warmgray text-parchment pt-16 pb-8 border-t border-terracotta-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full border border-dashed border-gold-400 flex items-center justify-center bg-terracotta-900">
+                            <i class="fa-solid fa-feather-pointed text-gold-400 text-sm"></i>
+                        </div>
+                        <span class="font-cinzel text-lg font-bold text-parchment">NAKSHI KANTHA</span>
+                    </div>
+                    <p class="text-xs text-parchment/70 leading-relaxed">
+                        Preserving and elevating the timeless needlework heritage of Bengal while empowering women artisans through sustainable fair trade.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="font-playfair text-gold-400 font-bold mb-4 text-sm uppercase tracking-wider">Quick Links</h5>
+                    <ul class="space-y-2 text-xs text-parchment/70">
+                        <li><a href="#heritage" class="hover:text-gold-400 transition">Heritage & History</a></li>
+                        <li><a href="#motifs" class="hover:text-gold-400 transition">Motif Symbolism</a></li>
+                        <li><a href="#gallery" class="hover:text-gold-400 transition">Masterpiece Gallery</a></li>
+                        <li><a href="#artisans" class="hover:text-gold-400 transition">Artisan Collective</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-playfair text-gold-400 font-bold mb-4 text-sm uppercase tracking-wider">Heritage Hubs</h5>
+                    <p class="text-xs text-parchment/70 leading-relaxed mb-2">
+                        Dhaka • Jasore • Jamalpur • Rajshahi
+                    </p>
+                    <p class="text-xs text-parchment/50">Direct connections with over 45 artisan village cooperatives.</p>
+                </div>
+
+                <div>
+                    <h5 class="font-playfair text-gold-400 font-bold mb-4 text-sm uppercase tracking-wider">Stay Connected</h5>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold-500 hover:text-warmgray transition"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold-500 hover:text-warmgray transition"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold-500 hover:text-warmgray transition"><i class="fa-brands fa-pinterest text-xs"></i></a>
+                    </div>
+                    <span class="text-[11px] text-parchment/60">Email: info@nakshikantha.art</span>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center text-xs text-parchment/50">
+                <p>&copy; 2026 Nakshi Kantha Heritage Craft Initiative. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal for Gallery Details -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-fade-in">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 bg-parchment text-warmgray w-10 h-10 rounded-full flex items-center justify-center hover:bg-terracotta-700 hover:text-white transition z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="lightbox-content" class="p-6 sm:p-8 space-y-4">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Inquiry Quote Modal -->
+    <div id="inquiry-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 bg-parchment text-warmgray w-8 h-8 rounded-full flex items-center justify-center hover:bg-terracotta-700 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+            <h3 class="font-playfair text-2xl font-bold text-terracotta-900">Inquire About Piece</h3>
+            <p id="inquiry-item-name" class="text-xs font-bold text-terracotta-700 uppercase tracking-wider mt-1 mb-4"></p>
+            
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-terracotta-900 mb-1">Your Name</label>
+                    <input type="text" required class="w-full px-3 py-2 border rounded-lg text-sm bg-parchment">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-terracotta-900 mb-1">Email Address</label>
+                    <input type="email" required class="w-full px-3 py-2 border rounded-lg text-sm bg-parchment">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-terracotta-900 mb-1">Message / Questions</label>
+                    <textarea rows="3" class="w-full px-3 py-2 border rounded-lg text-sm bg-parchment" placeholder="Inquire about custom dimensions, shipping, or lead times..."></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-terracotta-800 text-white font-bold rounded-xl hover:bg-terracotta-900 transition text-sm">Submit Inquiry</button>
+            </form>
+            <div id="inquiry-toast" class="hidden mt-4 bg-emerald-100 text-emerald-800 text-xs p-3 rounded-lg text-center font-medium">
+                Inquiry received! We will send details to your email shortly.
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Motif Data Dictionary
+        const motifsData = {
+            padma: {
+                title: "Padma (The Sacred Lotus)",
+                subtitle: "Traditional Centerpiece Motif",
+                icon: "🪷",
+                description: "The lotus motif is central to almost all traditional Nakshi Kanthas. Placed right at the center of the quilt, it symbolizes the sacred cosmos, purity emerging from mud, and divine harmony. The petals are rendered with concentric running stitches called 'Chala Stitches'.",
+                technique: "Stitched using fine red and indigo silk threads in circular progression. Outer borders are highlighted with 'Bhorat' (fill-in running stitch)."
+            },
+            kalka: {
+                title: "Kalka (Mango / Paisley Motif)",
+                subtitle: "Tree of Life & Fertility Symbol",
+                icon: "🥭",
+                description: "Representing life-force and growth, the Kalka motif originates from ancient Persian and Indian fertility imagery. In Kantha embroidery, Kalkas are usually placed around the corners, pointing toward the central lotus motif.",
+                technique: "Formed with curving 'Kaitan' (stem stitch) outlines filled with dense diagonal ripple running stitches."
+            },
+            mayur: {
+                title: "Mayur (Peacock of Joy)",
+                subtitle: "Fauna & Royal Grace",
+                icon: "🦚",
+                description: "Peacocks symbolize beauty, monsoon rains, and prosperity. Rural women stitch pairs of peacocks facing each other around garden branches, carrying emotional messages of reunion and romantic longing.",
+                technique: "Features multi-colored silk threads (red, turquoise, and mustard) with detailed plumage rendered through fine chain stitches."
+            },
+            shonkho: {
+                title: "Shonkho (Sacred Conch Shell)",
+                subtitle: "Auspicious Heritage Symbol",
+                icon: "🐚",
+                description: "The conch shell motif invokes divine blessing and protection. Traditionally embroidered on Kantha wraps given to newborns or brides to ward off misfortune and bring peace.",
+                technique: "Embroidered in subtle cream and gold threads with spiral running stitches that create a tactile 3D relief texture."
+            }
+        };
+
+        // Select Motif Functionality
+        function selectMotif(key) {
+            const data = motifsData[key];
+            if (!data) return;
+
+            document.getElementById('motif-icon').innerText = data.icon;
+            document.getElementById('motif-title').innerText = data.title;
+            document.getElementById('motif-subtitle').innerText = data.subtitle;
+            document.getElementById('motif-description').innerText = data.description;
+            document.getElementById('motif-technique').innerText = data.technique;
+
+            // Update Active Styling
+            document.querySelectorAll('.motif-btn').forEach(btn => {
+                btn.classList.remove('border-terracotta-700');
+                btn.classList.add('border-transparent');
+            });
+            document.getElementById(`btn-${key}`).classList.remove('border-transparent');
+            document.getElementById(`btn-${key}`).classList.add('border-terracotta-700');
+        }
+
+        // Gallery Filter Functionality
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Active Filter Button State
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-terracotta-800', 'text-white');
+                btn.classList.add('border', 'border-terracotta-900/20', 'text-warmgray');
+            });
+            event.target.classList.add('bg-terracotta-800', 'text-white');
+            event.target.classList.remove('border', 'border-terracotta-900/20', 'text-warmgray');
+        }
+
+        // Lightbox Modal Functions
+        function openLightbox(title, subtitle, description, imgSrc) {
+            const content = document.getElementById('lightbox-content');
+            content.innerHTML = `
+                <img src="${imgSrc}" class="w-full h-64 sm:h-80 object-cover rounded-2xl mb-4" alt="${title}">
+                <span class="text-xs font-bold text-terracotta-700 uppercase tracking-widest">${subtitle}</span>
+                <h3 class="font-playfair text-2xl font-bold text-terracotta-900">${title}</h3>
+                <p class="text-sm text-warmgray/80 leading-relaxed">${description}</p>
+                <div class="pt-4 border-t border-terracotta-900/10 flex justify-between items-center">
+                    <span class="text-xs text-warmgray/60"><i class="fa-solid fa-shield-halved text-terracotta-700"></i> Certified Authentic Nakshi Kantha</span>
+                    <button onclick="closeLightbox()" class="px-4 py-2 bg-terracotta-800 text-white rounded-xl text-xs font-bold">Close</button>
+                </div>
+            `;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        // Inquiry Modal Functions
+        function openInquiryModal(itemName) {
+            document.getElementById('inquiry-item-name').innerText = itemName;
+            document.getElementById('inquiry-toast').classList.add('hidden');
+            document.getElementById('inquiry-modal').classList.remove('hidden');
+        }
+
+        function closeInquiryModal() {
+            document.getElementById('inquiry-modal').classList.add('hidden');
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            const toast = document.getElementById('inquiry-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                closeInquiryModal();
+            }, 2500);
+        }
+
+        // Form Submission Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const toast = document.getElementById('form-toast');
+            toast.classList.remove('hidden');
+            e.target.reset();
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
